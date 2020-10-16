@@ -281,10 +281,10 @@ def main():
     print(__file__ + " start the A star algorithm demo !!") # print simple notes
 
     # start and goal position
-    sx = 10.0  # [m]
-    sy = 10.0  # [m]
+    sx = 0.0  # [m]
+    sy = 0.0  # [m]
     gx = 50.0  # [m]
-    gy = 50.0  # [m]
+    gy = 0.0  # [m]
     grid_size = 2  # [m]
     robot_radius = 1.0  # [m]
 
@@ -302,9 +302,11 @@ def main():
     for i in range(-10, 61):
         ox.append(-10.0)
         oy.append(i)
-    for i in range(-10, 40):
-        ox.append(20.0)
+    for i in range(-10, 10):
+        ox.append(10-i)
+        ox.append(10-i-0.3)
         oy.append(i)
+        oy.append(i-0.3)
     for i in range(0, 40):
         ox.append(40.0)
         oy.append(60.0 - i)
@@ -312,17 +314,17 @@ def main():
     
     # set fuel consuming area
     fc_x, fc_y = [], []
-    for i in range(30, 35):
-        for j in range(5, 45):
-            fc_x.append(i)
-            fc_y.append(j)
+    for i in range(0, 40):
+        for j in range(30, 35):
+            fc_x.append(j)
+            fc_y.append(i)
     
     # set time consuming area
     tc_x, tc_y = [], []
-    for i in range(5, 20):
-        for j in range(10, 30):
-            tc_x.append(i)
-            tc_y.append(j)
+    for i in range(20, 50):
+        for j in range(10, 20):
+            tc_x.append(j)
+            tc_y.append(i)
 
     if show_animation:  # pragma: no cover
         plt.plot(ox, oy, ".k") # plot the obstacle
