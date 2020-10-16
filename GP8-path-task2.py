@@ -312,17 +312,17 @@ def main():
     
     # set fuel consuming area
     fc_x, fc_y = [], []
-    for i in range(0, 40):
-        for j in range(30, 35):
-            fc_x.append(j)
-            fc_y.append(i)
+    for i in range(30, 35):
+        for j in range(5, 45):
+            fc_x.append(i)
+            fc_y.append(j)
     
     # set time consuming area
     tc_x, tc_y = [], []
-    for i in range(20, 50):
-        for j in range(10, 20):
-            tc_x.append(j)
-            tc_y.append(i)
+    for i in range(5, 20):
+        for j in range(10, 30):
+            tc_x.append(i)
+            tc_y.append(j)
 
     if show_animation:  # pragma: no cover
         plt.plot(ox, oy, ".k") # plot the obstacle
