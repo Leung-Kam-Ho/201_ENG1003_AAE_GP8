@@ -320,7 +320,7 @@ def main():
     # set time consuming area
     tc_x, tc_y = [], []
     for i in range(5, 20):
-        for j in range(15, 30):
+        for j in range(10, 30):
             tc_x.append(i)
             tc_y.append(j)
 
