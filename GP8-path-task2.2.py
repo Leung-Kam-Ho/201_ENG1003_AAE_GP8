@@ -19,6 +19,8 @@ import matplotlib.pyplot as plt
 
 import sys
 
+import signal
+
 import operator
 
 show_animation = True
@@ -364,6 +366,11 @@ def checkReq(text, input, op, val):
         output += " ...Failed"
     return output
 
+def keyboardInterruptHandler(sig, frame):
+    print("\nTerminated by user, trying to exit...")
+    exit(130)
+
+signal.signal(signal.SIGINT, keyboardInterruptHandler)
 try:
     Cf = float(sys.argv[1]) #cost of fuel per kg
     dF = float(sys.argv[2]) #trip fuel (e.g. 3000kg/h)
@@ -383,7 +390,7 @@ except ValueError:
 
 
 
-print("Cf="+str(Cf),"Ct="+str(Ct),"Cc="+str(Cc),"dF="+str(dF),"dT="+str(dT),"dFa="+str(dFa),"dTa="+str(dTa))
+print("Cf="+str(Cf),"dF="+str(dF),"Ct="+str(Ct),"dT="+str(dT),"Cc="+str(Cc),"dFa="+str(dFa),"dTa="+str(dTa))
 #Check if the configuration satisfies the requirements of the task...
 print("\nChecking the configuration for the task...")
 print("\t" + checkReq("Cf * dF + Ct * dT >= 25", Cf * dF + Ct * dT, operator.ge, 25))

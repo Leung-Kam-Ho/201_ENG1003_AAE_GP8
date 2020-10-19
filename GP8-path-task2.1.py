@@ -17,6 +17,8 @@ import math
 
 import matplotlib.pyplot as plt
 
+import signal
+
 import sys
 
 import operator
@@ -364,6 +366,12 @@ def checkReq(text, input, op, val):
         output += " ...Failed"
     return output
 
+
+def keyboardInterruptHandler(sig, frame):
+    print("\nTerminated by user, trying to exit...")
+    exit(130)
+
+signal.signal(signal.SIGINT, keyboardInterruptHandler)
 try:
     Cf = float(sys.argv[1]) #cost of fuel per kg
     dF = float(sys.argv[2]) #trip fuel (e.g. 3000kg/h)
@@ -383,7 +391,7 @@ except ValueError:
 
 
 
-print("Cf="+str(Cf),"Ct="+str(Ct),"Cc="+str(Cc),"dF="+str(dF),"dT="+str(dT),"dFa="+str(dFa),"dTa="+str(dTa))
+print("Cf="+str(Cf),"dF="+str(dF),"Ct="+str(Ct),"dT="+str(dT),"Cc="+str(Cc),"dFa="+str(dFa),"dTa="+str(dTa))
 #Check if the configuration satisfies the requirements of the task...
 print("\nChecking the configuration for the task...")
 print("\t" + checkReq("Cf > 0", Cf, operator.gt, 0))
@@ -391,7 +399,7 @@ print("\t" + checkReq("Ct > 0", Ct, operator.gt, 0))
 print("\t" + checkReq("Ct - Cf <= 30", Ct - Cf, operator.le, 30))
 print("\t" + checkReq("-0.5Ct - Cf <= -30", -0.5 * Ct - Cf, operator.le, -30))
 print("\t" + checkReq("2Ct - Cf >= 20", 2 * Ct - Cf, operator.ge, 20))
-print("\t" + checkReq("-4Ct - Cf", -4 * Ct - Cf, operator.ge, -220) + "\n")
+print("\t" + checkReq("-4Ct - Cf >= -220", -4 * Ct - Cf, operator.ge, -220) + "\n")
 
 if __name__ == '__main__':
     main()

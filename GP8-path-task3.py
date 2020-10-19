@@ -17,6 +17,8 @@ import math
 
 import matplotlib.pyplot as plt
 
+import signal
+
 import sys
 
 show_animation = True
@@ -354,6 +356,12 @@ def main():
         plt.pause(0.001) # pause 0.001 seconds
         plt.show() # show the plot
 
+
+def keyboardInterruptHandler(sig, frame):
+    print("\nTerminated by user, trying to exit...")
+    exit(130)
+
+signal.signal(signal.SIGINT, keyboardInterruptHandler)
 try:
     Cf = float(sys.argv[1]) #cost of fuel per kg
     dF = float(sys.argv[2]) #trip fuel (e.g. 3000kg/h)
@@ -370,6 +378,6 @@ except ValueError:
     exit(2)
 
 
-print("Cf="+str(Cf),"Ct="+str(Ct),"Cc="+str(Cc),"dF="+str(dF),"dT="+str(dT),"dFa="+str(dFa),"dTa="+str(dTa))
+print("Cf="+str(Cf),"dF="+str(dF),"Ct="+str(Ct),"dT="+str(dT),"Cc="+str(Cc),"dFa="+str(dFa),"dTa="+str(dTa))
 if __name__ == '__main__':
     main()
