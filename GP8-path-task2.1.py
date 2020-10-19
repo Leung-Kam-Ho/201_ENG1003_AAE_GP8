@@ -19,6 +19,8 @@ import matplotlib.pyplot as plt
 
 import sys
 
+import operator
+
 show_animation = True
 
 
@@ -67,6 +69,7 @@ class AStarPlanner:
         
 
         self.costPerGrid = self.C_F * self.Delta_F + self.C_T * self.Delta_T + self.C_C
+        print("\nCostPerGrid for the current configuration: " + str(self.costPerGrid))
 
     class Node: # definition of a sinle node
         def __init__(self, x, y, cost, parent_index):
@@ -353,6 +356,14 @@ def main():
         plt.pause(0.001) # pause 0.001 seconds
         plt.show() # show the plot
 
+
+
+def checkReq(text, input, op, val):
+    output = text + " (" + str(input) + ")"
+    if not (op(input, val)):
+        output += " ...Failed"
+    return output
+
 try:
     Cf = float(sys.argv[1]) #cost of fuel per kg
     dF = float(sys.argv[2]) #trip fuel (e.g. 3000kg/h)
@@ -362,11 +373,25 @@ try:
     dFa = float(sys.argv[6])
     dTa = float(sys.argv[7])
 except IndexError:
-    print('ERROR: Not enough arguments!')
+    print("ERROR: Not enough arguments!")
     exit(1)
+except ValueError:
+    print("ERROR: An argument is not a number!")
+    exit(2)
+
+
 
 
 
 print("Cf="+str(Cf),"Ct="+str(Ct),"Cc="+str(Cc),"dF="+str(dF),"dT="+str(dT),"dFa="+str(dFa),"dTa="+str(dTa))
+#Check if the configuration satisfies the requirements of the task...
+print("\nChecking the configuration for the task...")
+print("\t" + checkReq("Cf > 0", Cf, operator.gt, 0))
+print("\t" + checkReq("Ct > 0", Ct, operator.gt, 0))
+print("\t" + checkReq("Ct - Cf <= 30", Ct - Cf, operator.le, 30))
+print("\t" + checkReq("-0.5Ct - Cf <= -30", -0.5 * Ct - Cf, operator.le, -30))
+print("\t" + checkReq("2Ct - Cf >= 20", 2 * Ct - Cf, operator.ge, 20))
+print("\t" + checkReq("-4Ct - Cf", -4 * Ct - Cf, operator.ge, -220) + "\n")
+
 if __name__ == '__main__':
     main()

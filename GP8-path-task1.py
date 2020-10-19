@@ -67,6 +67,7 @@ class AStarPlanner:
         
 
         self.costPerGrid = self.C_F * self.Delta_F + self.C_T * self.Delta_T + self.C_C
+        print("\nCostPerGrid for the current configuration: " + str(self.costPerGrid))
 
     class Node: # definition of a sinle node
         def __init__(self, x, y, cost, parent_index):
@@ -362,9 +363,11 @@ try:
     dFa = float(sys.argv[6])
     dTa = float(sys.argv[7])
 except IndexError:
-    print('ERROR: Not enough arguments!')
+    print("ERROR: Not enough arguments!")
     exit(1)
-
+except ValueError:
+    print("ERROR: An argument is not a number!")
+    exit(2)
 
 
 print("Cf="+str(Cf),"Ct="+str(Ct),"Cc="+str(Cc),"dF="+str(dF),"dT="+str(dT),"dFa="+str(dFa),"dTa="+str(dTa))
