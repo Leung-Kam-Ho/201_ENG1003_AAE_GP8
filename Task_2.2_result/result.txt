@@ -1,0 +1,128 @@
+1)Cf=1 dF=1 Ct=9 dT=9 Cc=10 dFa=9 dTa=1
+Find goal with cost of ->  6098.507068336546
+    try:
+        for dTa in range(1,20):
+            for dFa in range(1,20):
+                for Cf in range(1,20):
+                    for Ct in range(1,20):
+                        for dF in range(1,20):
+                            for dT in range(1,20):
+                                if Cf*dF + Ct*dT >= 25:
+                                    if Cf+Ct >=10:
+                                        if dT+dF >=10:
+                                            if dTa + dFa >=10:
+                                                
+                                                main()
+                                                raise GetOutOfLoop
+    except GetOutOfLoop:
+        pass
+------------------------------------------------------------------------------
+
+
+2)Cf=1 dF=1 Ct=9 dT=9 Cc=10 dFa=1 dTa=9
+Find goal with cost of ->  6058.507068336546
+
+    try:
+        for dFa in range(1,20):
+            for Cf in range(1,20):
+                for Ct in range(1,20):
+                    for dF in range(1,20):
+                        for dT in range(1,20):
+                            for dTa in range(1,20):
+                                if Cf*dF + Ct*dT >= 25:
+                                    if Cf+Ct >=10:
+                                        if dT+dF >=10:
+                                            if dTa + dFa >=10:
+                                                
+                                                main()
+                                                raise GetOutOfLoop
+    except GetOutOfLoop:
+        pass
+------------------------------------------------------------------------------
+
+3)Cf=1 dF=16 Ct=9 dT=1 Cc=10 dFa=9 dTa=1
+Find goal with cost of ->  2331.9595949289323
+
+    try:
+        for dT in range(1,20):
+            for dTa in range(1,20):
+                for dFa in range(1,20):
+                    for Cf in range(1,20):
+                        for Ct in range(1,20):
+                            for dF in range(1,20):
+                                if Cf*dF + Ct*dT >= 25:
+                                    if Cf+Ct >=10:
+                                        if dT+dF >=10:
+                                            if dTa + dFa >=10:
+                                                
+                                                main()
+                                                raise GetOutOfLoop
+    except GetOutOfLoop:
+        pass
+------------------------------------------------------------------------------
+4)Cf=1 dF=1 Ct=9 dT=9 Cc=10 dFa=9 dTa=1(same as 1 and 6)
+Find goal with cost of ->  6098.507068336546
+    try:
+        for dF in range(1,20):
+            for dT in range(1,20):
+                for dTa in range(1,20):
+                    for dFa in range(1,20):
+                        for Cf in range(1,20):
+                            for Ct in range(1,20):
+                                if Cf*dF + Ct*dT >= 25:
+                                    if Cf+Ct >=10:
+                                        if dT+dF >=10:
+                                            if dTa + dFa >=10:
+                                                
+                                                main()
+                                                raise GetOutOfLoop
+    except GetOutOfLoop:
+        pass
+------------------------------------------------------------------------------
+5)Cf=16 dF=1 Ct=1 dT=9 Cc=10 dFa=9 dTa=1(alike 3)
+Find goal with cost of ->  2331.9595949289323
+    try:
+        for Ct in range(1,20):
+            for dF in range(1,20):
+                for dT in range(1,20):
+                    for dTa in range(1,20):
+                        for dFa in range(1,20):
+                            for Cf in range(1,20):
+                                if Cf*dF + Ct*dT >= 25:
+                                    if Cf+Ct >=10:
+                                        if dT+dF >=10:
+                                            if dTa + dFa >=10:
+                                                
+                                                main()
+                                                raise GetOutOfLoop
+    except GetOutOfLoop:
+        pass
+-----------------------------------------------------------------------------
+6)Cf=1 dF=1 Ct=9 dT=9 Cc=10 dFa=9 dTa=1(same as 4 and 1)
+Find goal with cost of ->  6098.507068336546
+    try:
+        for Cf in range(1,20):
+            for Ct in range(1,20):
+                for dF in range(1,20):
+                    for dT in range(1,20):
+                        for dTa in range(1,20):
+                            for dFa in range(1,20):
+                                if Cf*dF + Ct*dT >= 25:
+                                    if Cf+Ct >=10:
+                                        if dT+dF >=10:
+                                            if dTa + dFa >=10:
+                                                
+                                                main()
+                                                raise GetOutOfLoop
+    except GetOutOfLoop:
+        pass
+
+
+------------------------------------------------------------------------------
+Conclution:
+
+Cf=16 dF=1 Ct=1 dT=9 Cc=10 dFa=9 dTa=1
+or
+Cf=1 dF=16 Ct=1 dT=9 Cc=10 dFa=9 dTa=1
+
+is minimum
