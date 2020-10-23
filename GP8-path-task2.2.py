@@ -23,7 +23,7 @@ import signal
 
 import operator
 
-show_animation = True
+show_animation = False
 
 
 class AStarPlanner:
