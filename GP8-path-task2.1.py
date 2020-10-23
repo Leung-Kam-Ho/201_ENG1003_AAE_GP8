@@ -17,7 +17,7 @@ import math
 
 import matplotlib.pyplot as plt
 
-show_animation = True
+show_animation = False
 
 
 class AStarPlanner:
@@ -31,6 +31,9 @@ class AStarPlanner:
         resolution: grid resolution [m]
         rr: robot radius[m]
         """
+
+        global Cf
+        global Ct
 
         self.resolution = resolution # get resolution of the grid
         self.rr = rr # robot radis
@@ -47,13 +50,13 @@ class AStarPlanner:
         self.tc_y = tc_y
 
         ############you could modify the setup here for different aircraft models (based on the lecture slide) ##########################
-        self.C_F = 1
-        self.C_T = 2
-        self.C_C = 10
+        self.C_F = Cf
+        self.C_T = Ct
+        self.C_C = 1
         self.Delta_F = 1
-        self.Delta_T = 5
-        self.Delta_T_A = 0.1 # additional time 
-        self.Delta_F_A = 0.1 # additional fuel
+        self.Delta_T = 1
+        self.Delta_T_A = 0.2 # additional time 
+        self.Delta_F_A = 0.2 # additional fuel
         
 
         self.costPerGrid = self.C_F * self.Delta_F + self.C_T * self.Delta_T + self.C_C
@@ -83,6 +86,9 @@ class AStarPlanner:
             rx: x position list of the final path
             ry: y position list of the final path
         """
+
+        global Cf
+        global Ct
 
         start_node = self.Node(self.calc_xy_index(sx, self.min_x), # calculate the index based on given position
                                self.calc_xy_index(sy, self.min_y), 0.0, -1) # set cost zero, set parent index -1
@@ -117,7 +123,7 @@ class AStarPlanner:
 
             # reaching goal
             if current.x == goal_node.x and current.y == goal_node.y:
-                print("Find goal with cost of -> ",current.cost )
+                print("When Cf =%d Ct=%d Find goal with cost of -> %d"%(Cf,Ct,current.cost) )
                 goal_node.parent_index = current.parent_index
                 goal_node.cost = current.cost
                 break
@@ -239,15 +245,15 @@ class AStarPlanner:
         self.min_y = round(min(oy))
         self.max_x = round(max(ox))
         self.max_y = round(max(oy))
-        print("min_x:", self.min_x)
-        print("min_y:", self.min_y)
-        print("max_x:", self.max_x)
-        print("max_y:", self.max_y)
+        #print("min_x:", self.min_x)
+        #print("min_y:", self.min_y)
+        #print("max_x:", self.max_x)
+        #print("max_y:", self.max_y)
 
         self.x_width = round((self.max_x - self.min_x) / self.resolution)
         self.y_width = round((self.max_y - self.min_y) / self.resolution)
-        print("x_width:", self.x_width)
-        print("y_width:", self.y_width)
+        #print("x_width:", self.x_width)
+        #print("y_width:", self.y_width)
 
         # obstacle map generation
         self.obstacle_map = [[False for _ in range(self.y_width)]
@@ -277,8 +283,8 @@ class AStarPlanner:
         return motion
 
 
-def main():
-    print(__file__ + " start the A star algorithm demo !!") # print simple notes
+def main(Cf,Ct):
+    #print(__file__ + " start the A star algorithm demo !!") # print simple notes
 
     # start and goal position
     sx = 0.0  # [m]
@@ -335,7 +341,7 @@ def main():
         plt.grid(True) # plot the grid to the plot panel
         plt.axis("equal") # set the same resolution for x and y axis 
 
-    a_star = AStarPlanner(ox, oy, grid_size, robot_radius, fc_x, fc_y, tc_x, tc_y)
+    a_star = AStarPlanner(ox, oy, grid_size, robot_radius, fc_x, fc_y, tc_x, tc_y,Cf,Ct)
     rx, ry = a_star.planning(sx, sy, gx, gy)
 
     if show_animation:  # pragma: no cover
@@ -345,4 +351,6 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    main()     
+   
+                        
