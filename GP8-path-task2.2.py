@@ -257,20 +257,27 @@ class AStarPlanner:
         return True
 
     def calc_obstacle_map(self, ox, oy):
-
+        global printed
         self.min_x = round(min(ox))
         self.min_y = round(min(oy))
         self.max_x = round(max(ox))
         self.max_y = round(max(oy))
-        print("min_x:", self.min_x)
-        print("min_y:", self.min_y)
-        print("max_x:", self.max_x)
-        print("max_y:", self.max_y)
-
         self.x_width = round((self.max_x - self.min_x) / self.resolution)
         self.y_width = round((self.max_y - self.min_y) / self.resolution)
-        print("x_width:", self.x_width)
-        print("y_width:", self.y_width)
+
+
+        if printed == False:
+            print("min_x:", self.min_x)
+            print("min_y:", self.min_y)
+            print("max_x:", self.max_x)
+            print("max_y:", self.max_y)
+            print("x_width:", self.x_width)
+            print("y_width:", self.y_width)
+        else:
+            print("next try")
+        printed = True
+
+
 
         # obstacle map generation
         self.obstacle_map = [[False for _ in range(self.y_width)]
@@ -301,7 +308,7 @@ class AStarPlanner:
 
 
 def main():
-    print(__file__ + " start the A star algorithm demo !!") # print simple notes
+    print(" start the A star algorithm demo !!") # print simple notes
 
     # start and goal position
     sx = 0.0  # [m]
@@ -386,25 +393,85 @@ def keyboardInterruptHandler(sig, frame):
 
 
 if __name__ == '__main__':
-
+    global printed
     global Cf
     global Ct
     global dF
     global dT
     global dTa
     global dFa
-
-
-    for dFa in range(1,20):
+    printed = False
+    class GetOutOfLoop( Exception ):
+        pass
+    #result 1,4,6
+    try:
         for Cf in range(1,20):
             for Ct in range(1,20):
                 for dF in range(1,20):
                     for dT in range(1,20):
                         for dTa in range(1,20):
-                            if Cf*dF + Ct*dT >= 25:
-                                if Cf+Ct >=10:
-                                    if dT+dF >=10:
-                                        if dTa + dFa >=10:
-                                            
-                                            main()
-                                            sys.exit()
+                            for dFa in range(1,20):
+                                if Cf*dF + Ct*dT >= 25:
+                                    if Cf+Ct >=10:
+                                        if dT+dF >=10:
+                                            if dTa + dFa >=10:
+                                                
+                                                main()
+                                                raise GetOutOfLoop
+    except GetOutOfLoop:
+        pass
+    #result 2
+    try:
+        for dFa in range(1,20):
+            for Cf in range(1,20):
+                for Ct in range(1,20):
+                    for dF in range(1,20):
+                        for dT in range(1,20):
+                            for dTa in range(1,20):
+                                if Cf*dF + Ct*dT >= 25:
+                                    if Cf+Ct >=10:
+                                        if dT+dF >=10:
+                                            if dTa + dFa >=10:
+                                                
+                                                main()
+                                                raise GetOutOfLoop
+    except GetOutOfLoop:
+        pass
+    #result 3
+    try:
+        for dT in range(1,20):
+            for dTa in range(1,20):
+                for dFa in range(1,20):
+                    for Cf in range(1,20):
+                        for Ct in range(1,20):
+                            for dF in range(1,20):
+                                if Cf*dF + Ct*dT >= 25:
+                                    if Cf+Ct >=10:
+                                        if dT+dF >=10:
+                                            if dTa + dFa >=10:
+                                                
+                                                main()
+                                                raise GetOutOfLoop
+    except GetOutOfLoop:
+        pass
+
+    #result 5
+    try:
+        for Ct in range(1,20):
+            for dF in range(1,20):
+                for dT in range(1,20):
+                    for dTa in range(1,20):
+                        for dFa in range(1,20):
+                            for Cf in range(1,20):
+                                if Cf*dF + Ct*dT >= 25:
+                                    if Cf+Ct >=10:
+                                        if dT+dF >=10:
+                                            if dTa + dFa >=10:
+                                                
+                                                main()
+                                                raise GetOutOfLoop
+    except GetOutOfLoop:
+        pass
+
+    print("minimum is Cf=1 dF=16 Ct=9 dT=1 Cc=10 dFa=9 dTa=1 and Cf=16 dF=1 Ct=9 dT=1 Cc=10 dFa=9 dTa=1")
+
