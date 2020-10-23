@@ -55,8 +55,10 @@ class AStarPlanner:
         self.C_C = 10
         self.Delta_F = 5
         self.Delta_T = 5
+
         self.Delta_T_A = 5 # additional time 
         self.Delta_F_A = 5 # additional fuel
+
         
 
         self.costPerGrid = self.C_F * self.Delta_F + self.C_T * self.Delta_T + self.C_C
@@ -353,8 +355,10 @@ def main(Cf,Ct):
 if __name__ == '__main__':
     global Cf
     global Ct
+
     for Cf in range(100,1,-1):
         for Ct in range(1,100):
             main()     
+
    
                         
