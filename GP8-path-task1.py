@@ -38,13 +38,14 @@ class AStarPlanner:
         """
 
 
-        Cf = float(sys.argv[1]) #cost of fuel per kg
-        Ct = float(sys.argv[2]) #time related cost per minute
-        Cc = float(sys.argv[3]) #fixed cost independent of time
-        dF = float(sys.argv[4]) #trip fuel (e.g. 3000kg/h)
-        dT = float(sys.argv[5] )#trip Time (e.g. 8 hours from Hong Kong to Paris)
-        dFa = float(sys.argv[6])
-        dTa = float(sys.argv[7])
+        #Cf = float(sys.argv[1]) #cost of fuel per kg
+        #Ct = float(sys.argv[2]) #time related cost per minute
+        #Cc = float(sys.argv[3]) #fixed cost independent of time
+        #dF = float(sys.argv[4]) #trip fuel (e.g. 3000kg/h)
+        #dT = float(sys.argv[5] )#trip Time (e.g. 8 hours from Hong Kong to Paris)
+        #dFa = float(sys.argv[6])
+        #dTa = float(sys.argv[7])
+        
         self.resolution = resolution # get resolution of the grid
         self.rr = rr # robot radis
         self.min_x, self.min_y = 0, 0
