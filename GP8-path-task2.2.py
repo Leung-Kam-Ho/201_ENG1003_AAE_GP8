@@ -78,7 +78,7 @@ class AStarPlanner:
         
 
         self.costPerGrid = self.C_F * self.Delta_F + self.C_T * self.Delta_T + self.C_C
-        print("Cf="+str(Cf),"dF="+str(dF),"Ct="+str(Ct),"dT="+str(dT),"Cc="+str(self.Cc),"dFa="+str(dFa),"dTa="+str(dTa))
+        print("Cf="+str(Cf),"dF="+str(dF),"Ct="+str(Ct),"dT="+str(dT),"Cc="+str(self.C_C),"dFa="+str(dFa),"dTa="+str(dTa))
         print("\nCostPerGrid for the current configuration: " + str(self.costPerGrid))
 
     class Node: # definition of a sinle node
