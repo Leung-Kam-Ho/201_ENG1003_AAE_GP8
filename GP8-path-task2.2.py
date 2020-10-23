@@ -31,6 +31,12 @@ class AStarPlanner:
         resolution: grid resolution [m]
         rr: robot radius[m]
         """
+        global Cf
+        global Ct
+        global dF
+        global dT
+        global dTa
+        global dFa
 
         self.resolution = resolution # get resolution of the grid
         self.rr = rr # robot radis
@@ -47,13 +53,13 @@ class AStarPlanner:
         self.tc_y = tc_y
 
         ############you could modify the setup here for different aircraft models (based on the lecture slide) ##########################
-        self.C_F = 1
-        self.C_T = 2
+        self.C_F = Cf
+        self.C_T = Ct
         self.C_C = 10
-        self.Delta_F = 1
-        self.Delta_T = 5
-        self.Delta_T_A = 0.1 # additional time 
-        self.Delta_F_A = 0.1 # additional fuel
+        self.Delta_F = dF
+        self.Delta_T = dT
+        self.Delta_T_A = dTa # additional time 
+        self.Delta_F_A = dTf # additional fuel
         
 
         self.costPerGrid = self.C_F * self.Delta_F + self.C_T * self.Delta_T + self.C_C
@@ -345,4 +351,21 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    global Cf
+    global Ct
+    global dF
+    global dT
+    global dTa
+    global dFa
+
+    for Cf in range(1,100):
+        for Ct in range(1,100):
+            for dF in range(1,100):
+                for dT in range(1,100):
+                    for dTa in range(1,100):
+                        for dFa in range(1,100):
+                            if Cf*dF + Ct*dT >= 25:
+                                if Cf+Ct >=10:
+                                    if dT+dF >=10:
+                                        if dTa + dFa >=10:
+                                            main()
