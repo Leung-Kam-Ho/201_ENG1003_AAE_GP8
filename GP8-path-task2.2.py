@@ -78,6 +78,7 @@ class AStarPlanner:
         
 
         self.costPerGrid = self.C_F * self.Delta_F + self.C_T * self.Delta_T + self.C_C
+        print("Cf="+str(Cf),"dF="+str(dF),"Ct="+str(Ct),"dT="+str(dT),"Cc="+str(Cc),"dFa="+str(dFa),"dTa="+str(dTa))
         print("\nCostPerGrid for the current configuration: " + str(self.costPerGrid))
 
     class Node: # definition of a sinle node
@@ -392,6 +393,7 @@ if __name__ == '__main__':
     global dTa
     global dFa
 
+
     for Cf in range(1,50):
         for Ct in range(1,50):
             for dF in range(1,50):
@@ -402,4 +404,5 @@ if __name__ == '__main__':
                                 if Cf+Ct >=10:
                                     if dT+dF >=10:
                                         if dTa + dFa >=10:
+                                            
                                             main()
