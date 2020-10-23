@@ -52,9 +52,9 @@ class AStarPlanner:
         ############you could modify the setup here for different aircraft models (based on the lecture slide) ##########################
         self.C_F = Cf
         self.C_T = Ct
-        self.C_C = 1
-        self.Delta_F = 1
-        self.Delta_T = 1
+        self.C_C = 10
+        self.Delta_F = 5
+        self.Delta_T = 5
         self.Delta_T_A = 0.2 # additional time 
         self.Delta_F_A = 0.2 # additional fuel
         
@@ -351,6 +351,8 @@ def main(Cf,Ct):
 
 
 if __name__ == '__main__':
+    global Cf
+    global Ct
     main()     
    
                         
