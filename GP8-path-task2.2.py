@@ -386,6 +386,7 @@ def keyboardInterruptHandler(sig, frame):
 
 
 if __name__ == '__main__':
+
     global Cf
     global Ct
     global dF
@@ -394,15 +395,16 @@ if __name__ == '__main__':
     global dFa
 
 
-    for Cf in range(1,20):
-        for Ct in range(1,20):
-            for dF in range(1,20):
-                for dT in range(1,20):
-                    for dTa in range(1,20):
-                        for dFa in range(1,20):
+    for dFa in range(1,20):
+        for Cf in range(1,20):
+            for Ct in range(1,20):
+                for dF in range(1,20):
+                    for dT in range(1,20):
+                        for dTa in range(1,20):
                             if Cf*dF + Ct*dT >= 25:
                                 if Cf+Ct >=10:
                                     if dT+dF >=10:
                                         if dTa + dFa >=10:
                                             
                                             main()
+                                            sys.exit()
