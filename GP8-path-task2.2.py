@@ -73,7 +73,7 @@ class AStarPlanner:
         self.Delta_F = dF
         self.Delta_T = dT
         self.Delta_T_A = dTa # additional time 
-        self.Delta_F_A = dTf # additional fuel
+        self.Delta_F_A = dFa # additional fuel
         
 
         self.costPerGrid = self.C_F * self.Delta_F + self.C_T * self.Delta_T + self.C_C
@@ -376,33 +376,12 @@ def keyboardInterruptHandler(sig, frame):
     print("\nTerminated by user, trying to exit...")
     exit(130)
 
-signal.signal(signal.SIGINT, keyboardInterruptHandler)
-try:
-    Cf = float(sys.argv[1]) #cost of fuel per kg
-    dF = float(sys.argv[2]) #trip fuel (e.g. 3000kg/h)
-    Ct = float(sys.argv[3]) #time related cost per minute
-    dT = float(sys.argv[4]) #trip Time (e.g. 8 hours from Hong Kong to Paris)
-    Cc = float(sys.argv[5]) #fixed cost independent of time
-    dFa = float(sys.argv[6])
-    dTa = float(sys.argv[7])
-except IndexError:
-    print("ERROR: Not enough arguments!")
-    exit(1)
-except ValueError:
-    print("ERROR: An argument is not a number!")
-    exit(2)
 
 
 
 
 
-print("Cf="+str(Cf),"dF="+str(dF),"Ct="+str(Ct),"dT="+str(dT),"Cc="+str(Cc),"dFa="+str(dFa),"dTa="+str(dTa))
-#Check if the configuration satisfies the requirements of the task...
-print("\nChecking the configuration for the task...")
-print("\t" + checkReq("Cf * dF + Ct * dT >= 25", Cf * dF + Ct * dT, operator.ge, 25))
-print("\t" + checkReq("Cf + Ct >= 10", Cf + Ct, operator.ge, 10))
-print("\t" + checkReq("dF + dT >= 10", dF + dT, operator.ge, 10))
-print("\t" + checkReq("dFa + dTa >= 10", dFa + dTa, operator.ge, 10) + "\n")
+
 
 if __name__ == '__main__':
     global Cf
@@ -412,12 +391,12 @@ if __name__ == '__main__':
     global dTa
     global dFa
 
-    for Cf in range(1,100):
-        for Ct in range(1,100):
-            for dF in range(1,100):
-                for dT in range(1,100):
-                    for dTa in range(1,100):
-                        for dFa in range(1,100):
+    for Cf in range(1,50):
+        for Ct in range(1,50):
+            for dF in range(1,50):
+                for dT in range(1,50):
+                    for dTa in range(1,50):
+                        for dFa in range(1,50):
                             if Cf*dF + Ct*dT >= 25:
                                 if Cf+Ct >=10:
                                     if dT+dF >=10:
