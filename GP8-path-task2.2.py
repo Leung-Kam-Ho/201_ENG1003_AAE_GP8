@@ -394,12 +394,12 @@ if __name__ == '__main__':
     global dFa
 
 
-    for Cf in range(1,50):
-        for Ct in range(1,50):
-            for dF in range(1,50):
-                for dT in range(1,50):
-                    for dTa in range(1,50):
-                        for dFa in range(1,50):
+    for Cf in range(1,20):
+        for Ct in range(1,20):
+            for dF in range(1,20):
+                for dT in range(1,20):
+                    for dTa in range(1,20):
+                        for dFa in range(1,20):
                             if Cf*dF + Ct*dT >= 25:
                                 if Cf+Ct >=10:
                                     if dT+dF >=10:
