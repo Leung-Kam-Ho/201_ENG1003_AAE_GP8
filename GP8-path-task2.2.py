@@ -17,6 +17,12 @@ import math
 
 import matplotlib.pyplot as plt
 
+import sys
+
+import signal
+
+import operator
+
 show_animation = True
 
 
@@ -37,6 +43,14 @@ class AStarPlanner:
         global dT
         global dTa
         global dFa
+
+        #Cf = float(sys.argv[1]) #cost of fuel per kg
+        #Ct = float(sys.argv[2]) #time related cost per minute
+        #Cc = float(sys.argv[3]) #fixed cost independent of time
+        #dF = float(sys.argv[4]) #trip fuel (e.g. 3000kg/h)
+        #dT = float(sys.argv[5] )#trip Time (e.g. 8 hours from Hong Kong to Paris)
+        #dFa = float(sys.argv[6])
+        #dTa = float(sys.argv[7])
 
         self.resolution = resolution # get resolution of the grid
         self.rr = rr # robot radis
@@ -63,6 +77,7 @@ class AStarPlanner:
         
 
         self.costPerGrid = self.C_F * self.Delta_F + self.C_T * self.Delta_T + self.C_C
+        print("\nCostPerGrid for the current configuration: " + str(self.costPerGrid))
 
     class Node: # definition of a sinle node
         def __init__(self, x, y, cost, parent_index):
@@ -349,6 +364,45 @@ def main():
         plt.pause(0.001) # pause 0.001 seconds
         plt.show() # show the plot
 
+
+
+def checkReq(text, input, op, val):
+    output = text + " (" + str(input) + ")"
+    if not (op(input, val)):
+        output += " ...Failed"
+    return output
+
+def keyboardInterruptHandler(sig, frame):
+    print("\nTerminated by user, trying to exit...")
+    exit(130)
+
+signal.signal(signal.SIGINT, keyboardInterruptHandler)
+try:
+    Cf = float(sys.argv[1]) #cost of fuel per kg
+    dF = float(sys.argv[2]) #trip fuel (e.g. 3000kg/h)
+    Ct = float(sys.argv[3]) #time related cost per minute
+    dT = float(sys.argv[4]) #trip Time (e.g. 8 hours from Hong Kong to Paris)
+    Cc = float(sys.argv[5]) #fixed cost independent of time
+    dFa = float(sys.argv[6])
+    dTa = float(sys.argv[7])
+except IndexError:
+    print("ERROR: Not enough arguments!")
+    exit(1)
+except ValueError:
+    print("ERROR: An argument is not a number!")
+    exit(2)
+
+
+
+
+
+print("Cf="+str(Cf),"dF="+str(dF),"Ct="+str(Ct),"dT="+str(dT),"Cc="+str(Cc),"dFa="+str(dFa),"dTa="+str(dTa))
+#Check if the configuration satisfies the requirements of the task...
+print("\nChecking the configuration for the task...")
+print("\t" + checkReq("Cf * dF + Ct * dT >= 25", Cf * dF + Ct * dT, operator.ge, 25))
+print("\t" + checkReq("Cf + Ct >= 10", Cf + Ct, operator.ge, 10))
+print("\t" + checkReq("dF + dT >= 10", dF + dT, operator.ge, 10))
+print("\t" + checkReq("dFa + dTa >= 10", dFa + dTa, operator.ge, 10) + "\n")
 
 if __name__ == '__main__':
     global Cf
