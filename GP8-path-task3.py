@@ -307,7 +307,7 @@ def main():
     sy = 0.0  # [m]
     gx = 50.0  # [m]
     gy = 0.0  # [m]
-    grid_size = 2  # [m]
+    grid_size = 1  # [m]
     robot_radius = 1.0  # [m]
 
     # set obstacle positions
@@ -349,8 +349,8 @@ def main():
             tc_y.append(i)
 
     pc_x,pc_y = [],[]
-    for i in range(0,11):
-        for j in range(22,38):
+    for i in range(10,11):
+        for j in range(22,39):
             pc_x.append(j)
             pc_y.append(i)       
 
@@ -378,27 +378,9 @@ def main():
         plt.show() # show the plot
 
 
-def keyboardInterruptHandler(sig, frame):
-    print("\nTerminated by user, trying to exit...")
-    exit(130)
-
-signal.signal(signal.SIGINT, keyboardInterruptHandler)
-try:
-    Cf = float(sys.argv[1]) #cost of fuel per kg
-    dF = float(sys.argv[2]) #trip fuel (e.g. 3000kg/h)
-    Ct = float(sys.argv[3]) #time related cost per minute
-    dT = float(sys.argv[4]) #trip Time (e.g. 8 hours from Hong Kong to Paris)
-    Cc = float(sys.argv[5]) #fixed cost independent of time
-    dFa = float(sys.argv[6])
-    dTa = float(sys.argv[7])
-except IndexError:
-    print("ERROR: Not enough arguments!")
-    exit(1)
-except ValueError:
-    print("ERROR: An argument is not a number!")
-    exit(2)
 
 
-print("Cf="+str(Cf),"dF="+str(dF),"Ct="+str(Ct),"dT="+str(dT),"Cc="+str(Cc),"dFa="+str(dFa),"dTa="+str(dTa))
+
+
 if __name__ == '__main__':
     main()
