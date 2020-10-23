@@ -17,13 +17,7 @@ import math
 
 import matplotlib.pyplot as plt
 
-import signal
-
-import sys
-
-import operator
-
-show_animation = True
+show_animation = False
 
 
 class AStarPlanner:
@@ -38,13 +32,8 @@ class AStarPlanner:
         rr: robot radius[m]
         """
 
-        #Cf = float(sys.argv[1]) #cost of fuel per kg
-        #Ct = float(sys.argv[2]) #time related cost per minute
-        #Cc = float(sys.argv[3]) #fixed cost independent of time
-        #dF = float(sys.argv[4]) #trip fuel (e.g. 3000kg/h)
-        #dT = float(sys.argv[5] )#trip Time (e.g. 8 hours from Hong Kong to Paris)
-        #dFa = float(sys.argv[6])
-        #dTa = float(sys.argv[7])
+        global Cf
+        global Ct
 
         self.resolution = resolution # get resolution of the grid
         self.rr = rr # robot radis
@@ -63,15 +52,14 @@ class AStarPlanner:
         ############you could modify the setup here for different aircraft models (based on the lecture slide) ##########################
         self.C_F = Cf
         self.C_T = Ct
-        self.C_C = Cc
-        self.Delta_F = dF
-        self.Delta_T = dT
-        self.Delta_T_A = dTa # additional time 
-        self.Delta_F_A = dFa # additional fuel
+        self.C_C = 10
+        self.Delta_F = 5
+        self.Delta_T = 5
+        self.Delta_T_A = 5 # additional time 
+        self.Delta_F_A = 5 # additional fuel
         
 
         self.costPerGrid = self.C_F * self.Delta_F + self.C_T * self.Delta_T + self.C_C
-        print("\nCostPerGrid for the current configuration: " + str(self.costPerGrid))
 
     class Node: # definition of a sinle node
         def __init__(self, x, y, cost, parent_index):
@@ -98,6 +86,9 @@ class AStarPlanner:
             rx: x position list of the final path
             ry: y position list of the final path
         """
+
+        global Cf
+        global Ct
 
         start_node = self.Node(self.calc_xy_index(sx, self.min_x), # calculate the index based on given position
                                self.calc_xy_index(sy, self.min_y), 0.0, -1) # set cost zero, set parent index -1
@@ -132,7 +123,7 @@ class AStarPlanner:
 
             # reaching goal
             if current.x == goal_node.x and current.y == goal_node.y:
-                print("Find goal with cost of -> ",current.cost )
+                print("When Cf =%d Ct=%d Find goal with cost of -> %d"%(Cf,Ct,current.cost) )
                 goal_node.parent_index = current.parent_index
                 goal_node.cost = current.cost
                 break
@@ -254,15 +245,15 @@ class AStarPlanner:
         self.min_y = round(min(oy))
         self.max_x = round(max(ox))
         self.max_y = round(max(oy))
-        print("min_x:", self.min_x)
-        print("min_y:", self.min_y)
-        print("max_x:", self.max_x)
-        print("max_y:", self.max_y)
+        #print("min_x:", self.min_x)
+        #print("min_y:", self.min_y)
+        #print("max_x:", self.max_x)
+        #print("max_y:", self.max_y)
 
         self.x_width = round((self.max_x - self.min_x) / self.resolution)
         self.y_width = round((self.max_y - self.min_y) / self.resolution)
-        print("x_width:", self.x_width)
-        print("y_width:", self.y_width)
+        #print("x_width:", self.x_width)
+        #print("y_width:", self.y_width)
 
         # obstacle map generation
         self.obstacle_map = [[False for _ in range(self.y_width)]
@@ -292,8 +283,8 @@ class AStarPlanner:
         return motion
 
 
-def main():
-    print(__file__ + " start the A star algorithm demo !!") # print simple notes
+def main(Cf,Ct):
+    #print(__file__ + " start the A star algorithm demo !!") # print simple notes
 
     # start and goal position
     sx = 0.0  # [m]
@@ -350,7 +341,7 @@ def main():
         plt.grid(True) # plot the grid to the plot panel
         plt.axis("equal") # set the same resolution for x and y axis 
 
-    a_star = AStarPlanner(ox, oy, grid_size, robot_radius, fc_x, fc_y, tc_x, tc_y)
+    a_star = AStarPlanner(ox, oy, grid_size, robot_radius, fc_x, fc_y, tc_x, tc_y,Cf,Ct)
     rx, ry = a_star.planning(sx, sy, gx, gy)
 
     if show_animation:  # pragma: no cover
@@ -359,47 +350,11 @@ def main():
         plt.show() # show the plot
 
 
-
-def checkReq(text, input, op, val):
-    output = text + " (" + str(input) + ")"
-    if not (op(input, val)):
-        output += " ...Failed"
-    return output
-
-
-def keyboardInterruptHandler(sig, frame):
-    print("\nTerminated by user, trying to exit...")
-    exit(130)
-
-signal.signal(signal.SIGINT, keyboardInterruptHandler)
-try:
-    Cf = float(sys.argv[1]) #cost of fuel per kg
-    dF = float(sys.argv[2]) #trip fuel (e.g. 3000kg/h)
-    Ct = float(sys.argv[3]) #time related cost per minute
-    dT = float(sys.argv[4]) #trip Time (e.g. 8 hours from Hong Kong to Paris)
-    Cc = float(sys.argv[5]) #fixed cost independent of time
-    dFa = float(sys.argv[6])
-    dTa = float(sys.argv[7])
-except IndexError:
-    print("ERROR: Not enough arguments!")
-    exit(1)
-except ValueError:
-    print("ERROR: An argument is not a number!")
-    exit(2)
-
-
-
-
-
-print("Cf="+str(Cf),"dF="+str(dF),"Ct="+str(Ct),"dT="+str(dT),"Cc="+str(Cc),"dFa="+str(dFa),"dTa="+str(dTa))
-#Check if the configuration satisfies the requirements of the task...
-print("\nChecking the configuration for the task...")
-print("\t" + checkReq("Cf > 0", Cf, operator.gt, 0))
-print("\t" + checkReq("Ct > 0", Ct, operator.gt, 0))
-print("\t" + checkReq("Ct - Cf <= 30", Ct - Cf, operator.le, 30))
-print("\t" + checkReq("-0.5Ct - Cf <= -30", -0.5 * Ct - Cf, operator.le, -30))
-print("\t" + checkReq("2Ct - Cf >= 20", 2 * Ct - Cf, operator.ge, 20))
-print("\t" + checkReq("-4Ct - Cf >= -220", -4 * Ct - Cf, operator.ge, -220) + "\n")
-
 if __name__ == '__main__':
-    main()
+    global Cf
+    global Ct
+    for Cf in range(100,1,-1):
+        for Ct in range(1,100):
+            main()     
+   
+                        
