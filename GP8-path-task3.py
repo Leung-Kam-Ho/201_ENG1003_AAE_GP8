@@ -69,7 +69,7 @@ class AStarPlanner:
         self.Delta_T = 5
         self.Delta_T_A = 0.2 # additional time 
         self.Delta_F_A = 0.2 # additional fuel
-        self.Delta_P_A = -2
+
         
 
         self.costPerGrid = self.C_F * self.Delta_F + self.C_T * self.Delta_T + self.C_C
@@ -168,7 +168,7 @@ class AStarPlanner:
 
                 if self.calc_grid_position(node.x, self.min_x) in self.pc_x:
                     if self.calc_grid_position(node.y, self.min_y) in self.pc_y:
-                        node.cost = node.cost + (self.Delta_P_A * self.motion[i][2])                   
+                        node.cost = node.cost -4                   
                  # print()
                 
                 n_id = self.calc_grid_index(node)
