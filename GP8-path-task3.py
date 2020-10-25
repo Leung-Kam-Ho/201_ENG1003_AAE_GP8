@@ -69,7 +69,7 @@ class AStarPlanner:
         self.Delta_T = 5
         self.Delta_T_A = 0.2 # additional time 
         self.Delta_F_A = 0.2 # additional fuel
-        self.Delta_P_A = 2
+        self.Delta_P_A = -2
         
 
         self.costPerGrid = self.C_F * self.Delta_F + self.C_T * self.Delta_T + self.C_C
@@ -168,7 +168,7 @@ class AStarPlanner:
 
                 if self.calc_grid_position(node.x, self.min_x) in self.pc_x:
                     if self.calc_grid_position(node.y, self.min_y) in self.pc_y:
-                        node.cost = node.cost - (self.Delta_P_A * self.motion[i][2])                   
+                        node.cost = node.cost + (self.Delta_P_A * self.motion[i][2])                   
                  # print()
                 
                 n_id = self.calc_grid_index(node)
@@ -326,9 +326,7 @@ def main():
         oy.append(i)
     for i in range(-10, 10):
         ox.append(10-i)
-        ox.append(10-i-0.3)
         oy.append(i)
-        oy.append(i-0.3)
     for i in range(0, 40):
         ox.append(40.0)
         oy.append(60.0 - i)
@@ -349,10 +347,21 @@ def main():
             tc_y.append(i)
 
     pc_x,pc_y = [],[]
-    for i in range(10,11):
-        for j in range(22,39):
-            pc_x.append(j)
-            pc_y.append(i)       
+
+    for i in range(0,11):
+        pc_x.append(40-i)
+        pc_y.append(i)  
+    for i in range(9,12):
+        pc_x.append(i-10)
+        pc_y.append(i)  
+    pc_x.append(0)
+    pc_y.append(1)  
+
+    pc_x.append(-1)
+    pc_y.append(2)  
+    
+   
+
 
 
 
@@ -374,6 +383,7 @@ def main():
 
     if show_animation:  # pragma: no cover
         plt.plot(rx, ry, "-r") # show the route 
+        plt.grid()
         plt.pause(0.001) # pause 0.001 seconds
         plt.show() # show the plot
 
