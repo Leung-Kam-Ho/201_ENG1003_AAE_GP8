@@ -1,0 +1,4 @@
+Cf=16 dF=1 Ct=1 dT=9 Cc=10 dFa=1 dTa=9
+
+CostPerGrid for the current configuration: 35
+Find goal with cost of ->  2307.9646455628163

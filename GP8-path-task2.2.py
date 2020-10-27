@@ -403,75 +403,24 @@ if __name__ == '__main__':
     printed = False
     class GetOutOfLoop( Exception ):
         pass
-    #result 1,4,6
-    try:
-        for Cf in range(1,20):
-            for Ct in range(1,20):
-                for dF in range(1,20):
-                    for dT in range(1,20):
-                        for dTa in range(1,20):
-                            for dFa in range(1,20):
-                                if Cf*dF + Ct*dT >= 25:
-                                    if Cf+Ct >=10:
-                                        if dT+dF >=10:
-                                            if dTa + dFa >=10:
-                                                
-                                                main()
-                                                raise GetOutOfLoop
-    except GetOutOfLoop:
-        pass
-    #result 2
-    try:
-        for dFa in range(1,20):
-            for Cf in range(1,20):
-                for Ct in range(1,20):
-                    for dF in range(1,20):
-                        for dT in range(1,20):
-                            for dTa in range(1,20):
-                                if Cf*dF + Ct*dT >= 25:
-                                    if Cf+Ct >=10:
-                                        if dT+dF >=10:
-                                            if dTa + dFa >=10:
-                                                
-                                                main()
-                                                raise GetOutOfLoop
-    except GetOutOfLoop:
-        pass
-    #result 3
-    try:
-        for dT in range(1,20):
-            for dTa in range(1,20):
-                for dFa in range(1,20):
-                    for Cf in range(1,20):
-                        for Ct in range(1,20):
-                            for dF in range(1,20):
-                                if Cf*dF + Ct*dT >= 25:
-                                    if Cf+Ct >=10:
-                                        if dT+dF >=10:
-                                            if dTa + dFa >=10:
-                                                
-                                                main()
-                                                raise GetOutOfLoop
-    except GetOutOfLoop:
-        pass
 
     #result 5
     try:
+        dTa = 9
+        dFa = 1
         for Ct in range(1,20):
             for dF in range(1,20):
                 for dT in range(1,20):
-                    for dTa in range(1,20):
-                        for dFa in range(1,20):
-                            for Cf in range(1,20):
-                                if Cf*dF + Ct*dT >= 25:
-                                    if Cf+Ct >=10:
-                                        if dT+dF >=10:
-                                            if dTa + dFa >=10:
+                    for Cf in range(1,20):
+                        if Cf*dF + Ct*dT >= 25:
+                            if Cf+Ct >=10:
+                                if dT+dF >=10:
+                                    if dTa + dFa >=10:
                                                 
-                                                main()
-                                                raise GetOutOfLoop
+                                        main()
+                                        raise GetOutOfLoop
     except GetOutOfLoop:
         pass
 
-    print("minimum is Cf=1 dF=16 Ct=9 dT=1 Cc=10 dFa=9 dTa=1 and Cf=16 dF=1 Ct=9 dT=1 Cc=10 dFa=9 dTa=1")
+    print("")
 
