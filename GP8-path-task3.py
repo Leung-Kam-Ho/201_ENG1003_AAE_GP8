@@ -346,13 +346,17 @@ def main():
             tc_y.append(i)
 
     pc_x,pc_y = [],[]
-    for i in range(0,12):
-        pc_x.append(15-i)
+    for i in range(0,11):
+        pc_x.append(12-i)
         pc_y.append(i)
-    for i in range(1,4):
-        pc_x.append(i)
-        pc_y.append(11)
-    
+ #   for i in range(13,17):
+  #      pc_x.append(i)
+   #     pc_y.append(0)
+    for i in range(9,12):
+        pc_x.append(i-10)
+        pc_y.append(i)
+    pc_x.append(13)
+    pc_y.append(0)
    
 
 
