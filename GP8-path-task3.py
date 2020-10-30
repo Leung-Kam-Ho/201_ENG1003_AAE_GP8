@@ -351,7 +351,7 @@ def main():
     for i in range(0,7):
         pc_x.append(40-i)
         pc_y.append(i)  
-    for i in range(6,11):
+    for i in range(6,10):
         pc_x.append(39-i)
         pc_y.append(i)
     
