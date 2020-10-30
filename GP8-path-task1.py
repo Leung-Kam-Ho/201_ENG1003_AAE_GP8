@@ -22,7 +22,7 @@ import signal
 
 import sys
 
-show_animation = False
+show_animation = True
 
 
 
@@ -297,9 +297,9 @@ def main():
     print(__file__ + " start the A star algorithm demo !!") # print simple notes
 
     # start and goal position
-    sx = 0.0  # [m]
+    sx = 50.0  # [m]
     sy = 0.0  # [m]
-    gx = 50.0  # [m]
+    gx = 0.0  # [m]
     gy = 0.0  # [m]
     grid_size = 1  # [m]
     robot_radius = 1.0  # [m]
@@ -320,9 +320,7 @@ def main():
         oy.append(i)
     for i in range(-10, 10):
         ox.append(10-i)
-        ox.append(10-i-0.3)
         oy.append(i)
-        oy.append(i-0.3)
     for i in range(0, 40):
         ox.append(40.0)
         oy.append(60.0 - i)
