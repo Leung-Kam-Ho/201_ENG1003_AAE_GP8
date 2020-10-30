@@ -353,13 +353,29 @@ def main():
 if __name__ == '__main__':
     global Cf
     global Ct
+    CF = []   
+    CT = []   
+    Result = []
     for Cf in range(100,1,-1):
         for Ct in range(1,100):
             if (Ct - Cf) <= 30:
                 if ((-0.5*Ct)-Cf) <=-30:
                     if(2*Ct-Cf) >=20:
                         if(-4*Ct - Cf) >= -220:
-                            main()
-                            break          
+                            CT.append(Ct)
+                            CF.append(Cf)
+                            result = Cf*5 + Ct*5
+                            Result.append(result)
+                            break
+    lowest = 1000000000
+    index = 0
+    for i in range(0,len(Result)):
+        if Result[i] < lowest:
+            lowest = Result[i]
+            index = i
+    Ct= CT[index]
+    Cf = CF[index]
+    print("Cost attain minimum when","Ct =",Ct,"CF =",Cf)
+    main()    
    
                         

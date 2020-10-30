@@ -69,7 +69,7 @@ class AStarPlanner:
         self.Delta_T = 5
         self.Delta_T_A = 0.2 # additional time 
         self.Delta_F_A = 0.2 # additional fuel
-        self.Cp = -2
+        self.Cp = -4
 
         
 
@@ -166,11 +166,10 @@ class AStarPlanner:
                         # print("fuel consuming area!!")
                         node.cost = node.cost + self.Delta_F_A * self.motion[i][2]
 
-
+                # minus cost in minus-cost area
                 if self.calc_grid_position(node.x, self.min_x) in self.pc_x:
                     if self.calc_grid_position(node.y, self.min_y) in self.pc_y:
                         node.cost = node.cost + self.Cp * self.motion[i][2]      
-                 # print()
                 
                 n_id = self.calc_grid_index(node)
 
@@ -204,7 +203,7 @@ class AStarPlanner:
             rx.append(self.calc_grid_position(n.x, self.min_x))
             ry.append(self.calc_grid_position(n.y, self.min_y))
             parent_index = n.parent_index
-
+        print(rx,ry)
         return rx, ry
 
     @staticmethod
@@ -349,17 +348,12 @@ def main():
 
     pc_x,pc_y = [],[]
 
-    for i in range(0,11):
+    for i in range(0,7):
         pc_x.append(40-i)
         pc_y.append(i)  
-    for i in range(9,12):
-        pc_x.append(i-10)
-        pc_y.append(i)  
-    pc_x.append(0)
-    pc_y.append(1)  
-
-    pc_x.append(-1)
-    pc_y.append(2)  
+    for i in range(6,11):
+        pc_x.append(39-i)
+        pc_y.append(i)
     
    
 
