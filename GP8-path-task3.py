@@ -130,8 +130,6 @@ class AStarPlanner:
                 plt.gcf().canvas.mpl_connect('key_release_event',
                                              lambda event: [exit(
                                                  0) if event.key == 'escape' else None])
-                if len(closed_set.keys()) % 10 == 0:
-                    plt.pause(0.001)
 
             # reaching goal
             if current.x == goal_node.x and current.y == goal_node.y:
@@ -186,6 +184,7 @@ class AStarPlanner:
                     if open_set[n_id].cost > node.cost:
                         # This path is the best until now. record it
                         open_set[n_id] = node
+                        print(node)
 
         rx, ry = self.calc_final_path(goal_node, closed_set)
         # print(len(closed_set))
@@ -347,13 +346,12 @@ def main():
             tc_y.append(i)
 
     pc_x,pc_y = [],[]
-
-    for i in range(0,7):
-        pc_x.append(40-i)
-        pc_y.append(i)  
-    for i in range(6,10):
-        pc_x.append(39-i)
+    for i in range(0,12):
+        pc_x.append(15-i)
         pc_y.append(i)
+    for i in range(1,4):
+        pc_x.append(i)
+        pc_y.append(11)
     
    
 
@@ -379,7 +377,6 @@ def main():
     if show_animation:  # pragma: no cover
         plt.plot(rx, ry, "-r") # show the route 
         plt.grid()
-        plt.pause(0.001) # pause 0.001 seconds
         plt.show() # show the plot
 
 
