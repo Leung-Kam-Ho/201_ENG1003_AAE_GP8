@@ -356,7 +356,6 @@ def main():
 
     if show_animation:  # pragma: no cover
         plt.plot(rx, ry, "-r") # show the route 
-        plt.pause(0.001) # pause 0.001 seconds
         plt.show() # show the plot
 
 
