@@ -184,7 +184,6 @@ class AStarPlanner:
                     if open_set[n_id].cost > node.cost:
                         # This path is the best until now. record it
                         open_set[n_id] = node
-                        print(node)
 
         rx, ry = self.calc_final_path(goal_node, closed_set)
         # print(len(closed_set))
@@ -356,6 +355,8 @@ def main():
         pc_x.append(i-10)
         pc_y.append(i)
     pc_x.append(13)
+    pc_y.append(0)
+    pc_x.append(14)
     pc_y.append(0)
    
 
