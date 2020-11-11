@@ -17,7 +17,7 @@ import math
 
 import matplotlib.pyplot as plt
 
-show_animation = False
+show_animation = True
 
 
 class AStarPlanner:
@@ -364,6 +364,8 @@ if __name__ == '__main__':
                         if(-4*Ct - Cf) >= -220:
                             CT.append(Ct)
                             CF.append(Cf)
+                            #print(Cf)
+                            #print(Ct)
                             result = Cf*5 + Ct*5
                             Result.append(result)
                             break
