@@ -9,6 +9,9 @@ See Wikipedia article (https://en.wikipedia.org/wiki/A*_search_algorithm)
 
 This is the simple code for path planning class
 
+
+hi
+
 """
 
 
